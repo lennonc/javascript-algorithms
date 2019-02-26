@@ -91,6 +91,58 @@ export default class LinkedList {
     return deletedNode;
   }
 
+  deleteTail() {
+    const deletedTail = this.tail;
+
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+
+      return this.deletedTail;
+    }
+    let currentNode = this.head;
+    while (currentNode.next) {
+      if (!currentNode.next.next) {
+        currentNode.next = null;
+      } else {
+        currentNode = currentNode.next;
+      }
+    }
+
+    this.tail = currentNode;
+    return deletedTail;
+  }
+
+  /**
+   *
+   * @param { Object } params
+   * @param {*} params.value
+   * @param {function} [params.callback]
+   * @return {ListNode}
+   */
+  find({ value = undefined, callback = undefined }) {
+    if (!this.head) {
+      return null;
+    }
+
+    let currentNode = this.head;
+
+    while (currentNode) {
+      if (callback && callback(currentNode.value)) {
+        return currentNode;
+      }
+
+      if (value !== undefined && this.compare.equal(currentNode.value, value)) {
+        return currentNode;
+      }
+
+      currentNode = currentNode.next;
+    }
+
+    return null;
+  }
+
+
   /**
    * @param {function} [callback]
    * @return {string}
@@ -113,5 +165,11 @@ export default class LinkedList {
     }
 
     return nodes;
+  }
+
+  fromArray(values) {
+    values.forEach(element => this.append(element));
+
+    return this;
   }
 }

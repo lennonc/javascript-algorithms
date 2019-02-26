@@ -71,4 +71,53 @@ describe('LinkedList', () => {
     list.delete(4);
     expect(list.toString()).toBe('');
   });
+
+  it('should find a node in a linked list', () => {
+    const list = new LinkedList();
+    expect(list.find({ value: 5 })).toBeNull();
+
+    list.append(1).append(2).append(3);
+
+    expect(list.find({ value: 4 })).toBeNull();
+    expect(list.head.value).toBe(1);
+    expect(list.find({ value: 1 }).value).toBe(1);
+  });
+
+  it('should find a node by callback', () => {
+    const list = new LinkedList();
+
+    list
+      .append({ value: 1, key: 'test1' })
+      .append({ value: 2, key: 'test2' })
+      .append({ value: 3, key: 'test3' });
+
+    const node = list.find({ callback: value => value.key === 'test2' });
+
+    expect(node).toBeDefined();
+    expect(node.value.value).toBe(2);
+    expect(node.value.key).toBe('test2');
+    expect(list.find({ callback: value => value.key === 'test5' })).toBeNull();
+  });
+
+  it('should create a linked list from an array', () => {
+    const list = new LinkedList();
+
+    list.fromArray([1, 1, 2, 3, 3, 3, 4, 5]);
+    expect(list.toString()).toBe('1,1,2,3,3,3,4,5');
+  });
+
+  it('should delete the tail of a linked list', () => {
+    const list = new LinkedList();
+    expect(list.deleteTail()).toBeUndefined();
+
+    list.fromArray([1, 2, 5]);
+    expect(list.tail.value).toBe(5);
+    list.deleteTail();
+    expect(list.tail.value).toBe(2);
+    list.deleteTail();
+    expect(list.tail.value).toBe(1);
+    list.deleteTail();
+    expect(list.head).toBeNull();
+    expect(list.tail).toBeNull();
+  });
 });
