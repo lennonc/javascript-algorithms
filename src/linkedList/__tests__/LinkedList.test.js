@@ -108,7 +108,7 @@ describe('LinkedList', () => {
 
   it('should delete the tail of a linked list', () => {
     const list = new LinkedList();
-    expect(list.deleteTail()).toBeUndefined();
+    expect(list.deleteTail()).toBeNull();
 
     list.fromArray([1, 2, 5]);
     expect(list.tail.value).toBe(5);
@@ -119,5 +119,23 @@ describe('LinkedList', () => {
     list.deleteTail();
     expect(list.head).toBeNull();
     expect(list.tail).toBeNull();
+  });
+
+  it('should delete the head of a linked list', () => {
+    const list = new LinkedList();
+    expect(list.deleteHead()).toBeNull();
+
+    list.append(1).append(2);
+
+    expect(list.head.toString()).toBe('1');
+    expect(list.tail.toString()).toBe('2');
+
+    const deletedNode1 = list.deleteHead();
+    expect(deletedNode1.value).toBe(1);
+    expect(list.head.toString()).toBe('2');
+
+    const deletedNode2 = list.deleteHead();
+    expect(deletedNode2.value).toBe(2);
+    expect(list.head).toBeNull();
   });
 });

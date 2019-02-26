@@ -91,6 +91,9 @@ export default class LinkedList {
     return deletedNode;
   }
 
+  /**
+   * @returns ListNode
+   */
   deleteTail() {
     const deletedTail = this.tail;
 
@@ -98,7 +101,7 @@ export default class LinkedList {
       this.head = null;
       this.tail = null;
 
-      return this.deletedTail;
+      return deletedTail;
     }
     let currentNode = this.head;
     while (currentNode.next) {
@@ -111,6 +114,23 @@ export default class LinkedList {
 
     this.tail = currentNode;
     return deletedTail;
+  }
+
+  deleteHead() {
+    const deletedHead = this.head;
+
+    if (!this.head) {
+      return null;
+    }
+
+    if (this.head.next) {
+      this.head = this.head.next;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
+
+    return deletedHead;
   }
 
   /**
