@@ -59,5 +59,16 @@ describe('LinkedList', () => {
 
     expect(list.head.value).toBe(2);
     expect(list.tail.value).toBe(5);
+
+    list.delete(2);
+    expect(list.toString()).toBe('4,5');
+    expect(list.head.value).toBe(4);
+
+    list.delete(5);
+    expect(list.head.value).toBe(4);
+    expect(list.tail.value).toBe(4);
+
+    list.delete(4);
+    expect(list.toString()).toBe('');
   });
 });
