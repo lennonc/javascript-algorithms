@@ -138,4 +138,14 @@ describe('LinkedList', () => {
     expect(deletedNode2.value).toBe(2);
     expect(list.head).toBeNull();
   });
+
+  it('should reverse a linked list', () => {
+    const list = new LinkedList();
+
+    list.fromArray([1, 2, 3, 4, 5]);
+    expect(list.toString()).toBe('1,2,3,4,5');
+
+    list.reverse();
+    expect(list.toString()).toBe('5,4,3,2,1');
+  });
 });

@@ -133,6 +133,25 @@ export default class LinkedList {
     return deletedHead;
   }
 
+  reverse() {
+    let currentNode = this.head;
+    let nextNode = null;
+    let previousNode = null;
+
+    while (currentNode) {
+      nextNode = currentNode.next;
+
+      currentNode.next = previousNode;
+      previousNode = currentNode;
+      currentNode = nextNode;
+    }
+
+    this.tail = this.head;
+    this.head = previousNode;
+
+    return this;
+  }
+
   /**
    *
    * @param { Object } params
