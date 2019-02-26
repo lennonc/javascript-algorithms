@@ -37,5 +37,27 @@ describe('LinkedList', () => {
     const list = new LinkedList();
 
     expect(list.delete(5)).toBeNull();
+
+    list.append(1);
+    list.append(1);
+    list.append(2);
+    list.append(3);
+    list.append(3);
+    list.append(3);
+    list.append(4);
+    list.append(5);
+
+    expect(list.head.toString()).toBe('1');
+    expect(list.tail.toString()).toBe('5');
+
+    const deleteNode = list.delete(3);
+    expect(deleteNode.value).toBe(3);
+    expect(list.toString()).toBe('1,1,2,4,5');
+
+    list.delete(1);
+    expect(list.toString()).toBe('2,4,5');
+
+    expect(list.head.value).toBe(2);
+    expect(list.tail.value).toBe(5);
   });
 });

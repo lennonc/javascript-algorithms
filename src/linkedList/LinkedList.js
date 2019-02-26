@@ -1,11 +1,17 @@
 import ListNode from './ListNode';
+import Comparator from '../utils/comparator/Comparator';
 
 export default class LinkedList {
-  constructor() {
+  /**
+   * @param {Function} [comparator]
+   */
+  constructor(comparator) {
     /** @var LinkedListNode */
     this.head = null;
     /** @var LinkedListNode */
     this.tail = null;
+
+    this.compare = new Comparator(comparator);
   }
 
   /**
@@ -55,6 +61,34 @@ export default class LinkedList {
     if (!this.head) {
       return null;
     }
+
+    let deletedNode = null;
+
+    // If we're deleting the head. Make the next node the head
+    while (this.head && this.compare.equal(this.head.value, value)) {
+      deletedNode = this.head;
+      this.head = this.head.next;
+    }
+
+    let currentNode = this.head;
+
+    if (currentNode !== null) {
+      while (currentNode.next) {
+        if (this.compare.equal(currentNode.next.value, value)) {
+          deletedNode = currentNode.next;
+          currentNode.next = currentNode.next.next;
+        } else {
+          currentNode = currentNode.next;
+        }
+      }
+    }
+
+    // Check if we need to delete the tail
+    if (this.compare.equal(this.tail.value, value)) {
+      this.tail = currentNode;
+    }
+
+    return deletedNode;
   }
 
   /**
