@@ -7,6 +7,10 @@
     "test": "jest",
     "lint": "eslint ./src/*"
   },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "author": "Lennon Chimbumu",
   "license": "ISC",
   "devDependencies": {
