@@ -1,4 +1,5 @@
 import DoublyLinkedList from '../DoublyLinkedList';
+import LinkedList from '../../linked-list/LinkedList';
 
 describe('DoublyLinkedList', () => {
   it('should create a new doubly linked list', () => {
@@ -20,5 +21,76 @@ describe('DoublyLinkedList', () => {
     list.append(2);
     expect(list.tail.value).toBe(2);
     expect(list.tail.previous.value).toBe(1);
+  });
+
+  it('should prepend a node to the list', () => {
+    const list = new DoublyLinkedList();
+
+    list.prepend(1);
+    expect(list.head.value).toBe(1);
+    expect(list.tail.value).toBe(1);
+
+    list.prepend(2);
+    expect(list.head.value).toBe(2);
+
+    expect(list.tail.previous.value).toBe(2);
+    expect(list.toString()).toBe('2,1');
+  });
+
+  it('should convert a list to a string', () => {
+    const list = new DoublyLinkedList();
+
+    list.append(1).append(2).append(3).append(3);
+    expect(list.toString()).toBe('1,2,3,3');
+  });
+
+  it('should delete a node by value', () => {
+    const linkedList = new DoublyLinkedList();
+
+    expect(linkedList.delete(5)).toBeNull();
+
+    linkedList.append(1);
+    linkedList.append(1);
+    linkedList.append(2);
+    linkedList.append(3);
+    linkedList.append(3);
+    linkedList.append(3);
+    linkedList.append(4);
+    linkedList.append(5);
+
+    expect(linkedList.head.toString()).toBe('1');
+    expect(linkedList.tail.toString()).toBe('5');
+
+    const deletedNode = linkedList.delete(3);
+    expect(deletedNode.value).toBe(3);
+    expect(linkedList.tail.previous.previous.value).toBe(2);
+    expect(linkedList.toString()).toBe('1,1,2,4,5');
+
+    linkedList.delete(3);
+    expect(linkedList.toString()).toBe('1,1,2,4,5');
+
+    linkedList.delete(1);
+    expect(linkedList.toString()).toBe('2,4,5');
+
+    expect(linkedList.head.toString()).toBe('2');
+    expect(linkedList.head.next.next).toBe(linkedList.tail);
+    expect(linkedList.tail.previous.previous).toBe(linkedList.head);
+    expect(linkedList.tail.toString()).toBe('5');
+
+    linkedList.delete(5);
+    expect(linkedList.toString()).toBe('2,4');
+
+    expect(linkedList.head.toString()).toBe('2');
+    expect(linkedList.tail.toString()).toBe('4');
+
+    linkedList.delete(4);
+    expect(linkedList.toString()).toBe('2');
+
+    expect(linkedList.head.toString()).toBe('2');
+    expect(linkedList.tail.toString()).toBe('2');
+    expect(linkedList.head).toBe(linkedList.tail);
+
+    linkedList.delete(2);
+    expect(linkedList.toString()).toBe('');
   });
 });
