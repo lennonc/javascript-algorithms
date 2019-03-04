@@ -1,5 +1,4 @@
 import DoublyLinkedList from '../DoublyLinkedList';
-import LinkedList from '../../linked-list/LinkedList';
 
 describe('DoublyLinkedList', () => {
   it('should create a new doubly linked list', () => {
@@ -92,5 +91,30 @@ describe('DoublyLinkedList', () => {
 
     linkedList.delete(2);
     expect(linkedList.toString()).toBe('');
+  });
+
+  it('should find a node in a linked list', () => {
+    const list = new DoublyLinkedList();
+    expect(list.find({ value: 5 })).toBeNull();
+
+    list.append(1).append(2).append(3);
+
+    expect(list.find({ value: 4 })).toBeNull();
+    expect(list.head.value).toBe(1);
+    expect(list.find({ value: 1 }).value).toBe(1);
+  });
+
+  it('should find a node in a linked list using a callback', () => {
+    const list = new DoublyLinkedList();
+
+    list
+      .append({ value: 1, key: 'test1' })
+      .append({ value: 2, key: 'test2' })
+      .append({ value: 3, key: 'test3' });
+
+    const node = list.find({ callback: value => value.key === 'test3' });
+    expect(node).toBeDefined();
+    expect(node.value.value).toBe(3);
+    expect(list.find({ callback: value => value.key === 'test5' })).toBeNull();
   });
 });

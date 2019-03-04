@@ -108,6 +108,35 @@ export default class DoublyLinkedList {
   }
 
   /**
+ *
+ * @param { Object } params
+ * @param {*} params.value
+ * @param {function} [params.callback]
+ * @return {DoublyLinkedListNode}
+ */
+  find({ value = undefined, callback = undefined }) {
+    if (!this.head) {
+      return null;
+    }
+
+    let currentNode = this.head;
+
+    while (currentNode) {
+      if (callback && callback(currentNode.value)) {
+        return currentNode;
+      }
+
+      if (value !== undefined && this.compare.equal(currentNode.value, value)) {
+        return currentNode;
+      }
+
+      currentNode = currentNode.next;
+    }
+
+    return null;
+  }
+
+  /**
    * @returns DoublyLinkedListNode[]
    */
   toArray() {
