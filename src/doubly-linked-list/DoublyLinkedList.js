@@ -215,4 +215,32 @@ export default class DoublyLinkedList {
   toString(callback) {
     return this.toArray().map(node => node.toString(callback)).toString();
   }
+
+  /**
+   * Reverse a linked list
+   * @returns {DoublyLinkedList}
+   */
+  reverse() {
+    let currentNode = this.head;
+    let previousNode = null;
+    let nextNode = null;
+
+    while (currentNode) {
+      // store the next node
+      nextNode = currentNode.next;
+      previousNode = currentNode.previous;
+
+      // Swap the next and previous nodes for the current node
+      currentNode.next = previousNode;
+      currentNode.previous = nextNode;
+
+      // advance previous node and current node one step
+      previousNode = currentNode;
+      currentNode = nextNode;
+    }
+
+    // reset head and tail
+    this.tail = this.head;
+    this.head = previousNode;
+  }
 }

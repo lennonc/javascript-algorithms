@@ -167,4 +167,12 @@ describe('DoublyLinkedList', () => {
     list.fromArray([1, 2, 3, 4, 5, 6]);
     expect(list.toString()).toBe('1,2,3,4,5,6');
   });
+
+  it('should reverse a doubly linked list', () => {
+    const list = new DoublyLinkedList();
+
+    list.fromArray([1, 2, 3, 4, 5, 6]);
+    list.reverse();
+    expect(list.toString()).toBe('6,5,4,3,2,1');
+  });
 });
