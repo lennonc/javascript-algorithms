@@ -117,4 +117,54 @@ describe('DoublyLinkedList', () => {
     expect(node.value.value).toBe(3);
     expect(list.find({ callback: value => value.key === 'test5' })).toBeNull();
   });
+
+  it('should delete the tail of the linked list', () => {
+    const list = new DoublyLinkedList();
+    expect(list.deleteTail()).toBeNull();
+
+    list.append(1);
+
+    expect(list.head).toEqual(list.tail);
+    const deletedNode = list.deleteTail();
+    expect(deletedNode.value).toBe(1);
+
+    list.append(1).append(2).append(3);
+
+    list.deleteTail();
+    expect(list.tail.value).toBe(2);
+
+    list.deleteTail();
+    expect(list.tail.value).toBe(1);
+  });
+
+  it('should delete the head of the linked list', () => {
+    const list = new DoublyLinkedList();
+    expect(list.deleteHead()).toBeNull();
+
+    list.append(1);
+
+    const deletedNode = list.deleteHead();
+    expect(list.head).toBeNull();
+    expect(list.tail).toBeNull();
+    expect(deletedNode.value).toBe(1);
+
+
+    list.append(1).append(2).append(3);
+
+    list.deleteHead();
+    expect(list.head.value).toBe(2);
+
+    list.deleteHead();
+    expect(list.head.value).toBe(3);
+
+    list.deleteHead();
+    expect(list.head).toBeNull();
+  });
+
+  it('should convert an array into a doubly linked list', () => {
+    const list = new DoublyLinkedList();
+
+    list.fromArray([1, 2, 3, 4, 5, 6]);
+    expect(list.toString()).toBe('1,2,3,4,5,6');
+  });
 });

@@ -137,6 +137,56 @@ export default class DoublyLinkedList {
   }
 
   /**
+   * @returns {DoublyLinkedListNode}
+   */
+  deleteTail() {
+    if (!this.tail) {
+      return null;
+    }
+
+    // If there is only one node
+    if (this.head === this.tail) {
+      const deletedTail = this.tail;
+      this.head = null;
+      this.tail = null;
+
+      return deletedTail;
+    }
+
+    // If there are many nodes
+    const deletedTail = this.tail;
+
+    this.tail = this.tail.previous;
+    this.tail.next = null;
+
+    return deletedTail;
+  }
+
+  /**
+   * @returns {DoublyLinkedListNode}
+   */
+  deleteHead() {
+    if (!this.head) {
+      return null;
+    }
+
+    if (this.head === this.tail) {
+      const deletedHead = this.head;
+      this.head = null;
+      this.tail = null;
+
+      return deletedHead;
+    }
+
+    const deletedHead = this.head;
+
+    this.head = this.head.next;
+    this.head.previous = null;
+
+    return deletedHead;
+  }
+
+  /**
    * @returns DoublyLinkedListNode[]
    */
   toArray() {
@@ -150,6 +200,16 @@ export default class DoublyLinkedList {
     }
 
     return nodes;
+  }
+
+  /**
+   * @param {*[] values = Array of values to be converted}
+   * @returns {DoublyLinkedList}
+   */
+  fromArray(values) {
+    values.forEach(value => this.append(value));
+
+    return this;
   }
 
   toString(callback) {
