@@ -11,7 +11,7 @@ export default class Heap {
     }
 
     // Array representation of the Heap
-    this.HeapContainer = [];
+    this.heapContainer = [];
     this.compare = new Comparator(comparatorFunction);
   }
 
