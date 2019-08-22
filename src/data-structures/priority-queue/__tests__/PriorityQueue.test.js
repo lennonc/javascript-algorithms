@@ -47,7 +47,7 @@ describe('PriorityQueue', () => {
     priorityQueue.add(10, 1);
     priorityQueue.add(5, 2);
     priorityQueue.add(100, 0);
-    priorityQueue.add(200, 0);
+    priorityQueue.add(200);
 
     expect(priorityQueue.poll()).toBe(100);
     expect(priorityQueue.poll()).toBe(200);
