@@ -36,7 +36,7 @@ describe('Stack', () => {
     stack.push({ value: 'test1', key: 'key1' });
     stack.push({ value: 'test2', key: 'key2' });
 
-    const stringifier = value => `${value.key}:${value.value}`;
+    const stringifier = (value) => `${value.key}:${value.value}`;
 
     expect(stack.toString(stringifier)).toBe('key2:test2,key1:test1');
     expect(stack.pop().value).toBe('test2');
@@ -52,7 +52,6 @@ describe('Stack', () => {
 
     expect(stack.isEmpty()).toBe(false);
   });
-
 
   it('should pop a value from the stack', () => {
     const stack = new Stack();

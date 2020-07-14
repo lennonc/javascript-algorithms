@@ -41,7 +41,7 @@ export default class Stack {
     return this
       .linkedList
       .toArray()
-      .map(node => node.value);
+      .map((node) => node.value);
   }
 
   /**
